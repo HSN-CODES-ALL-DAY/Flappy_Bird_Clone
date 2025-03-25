@@ -3,7 +3,14 @@
 
 
 
-window::window():flappy(nullptr),pole(nullptr){
+window::window():
+flappy(nullptr),
+pole(nullptr,100),
+pole2(nullptr,100),
+pole3(nullptr,100),
+pole4(nullptr,100)
+
+{
     bool keep_window_open = true;
     if (SDL_Init(SDL_INIT_VIDEO) > 0) {
         std::cerr << "SDL FAILED TO LOAD \n";
@@ -28,7 +35,11 @@ window::window():flappy(nullptr),pole(nullptr){
         std::cerr << "SDL2 Error: " << SDL_GetError() << "\n";
     }
     flappy={renderimg};
-    pole={renderimg};
+    pole={renderimg,1000};
+    pole2={renderimg,650};
+    pole3={renderimg,300};
+    pole4={renderimg,10};
+    // pole5={renderimg,400};
 }
 
 void window::loop(){
@@ -50,14 +61,24 @@ void window::loop(){
 void window::update(double delta_time){
     flappy.update(delta_time);
     pole.update(delta_time);
+
+    pole2.update(delta_time);
+    pole3.update(delta_time);
+    pole4.update(delta_time);
     checkcollisions();
 }
 
 void window::checkcollisions(){
-    if(SDL_HasIntersection(&flappy.rect(), &pole.rect())){
+    if(SDL_HasIntersection(&flappy.rect(), &pole.rect())||SDL_HasIntersection(&flappy.rect(), &pole.rect2())){
         keep_window_open=false;
     }
-    if(SDL_HasIntersection(&flappy.rect(), &pole.rect2())){
+    if(SDL_HasIntersection(&flappy.rect(), &pole2.rect())||SDL_HasIntersection(&flappy.rect(), &pole2.rect2())){
+        keep_window_open=false;
+    }
+    if(SDL_HasIntersection(&flappy.rect(), &pole3.rect())||SDL_HasIntersection(&flappy.rect(), &pole3.rect2())){
+        keep_window_open=false;
+    }
+    if(SDL_HasIntersection(&flappy.rect(), &pole4.rect())||SDL_HasIntersection(&flappy.rect(), &pole4.rect2())){
         keep_window_open=false;
     }
 }
@@ -85,6 +106,9 @@ void window::draw() {
     background();
     flappy.draw();
     pole.draw();
+    pole2.draw();
+    pole3.draw();
+    pole4.draw();
     SDL_RenderPresent(renderimg);
     SDL_DestroyTexture(skytexture);
 }

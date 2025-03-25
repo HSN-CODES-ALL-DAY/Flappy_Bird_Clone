@@ -1,23 +1,16 @@
 #include "poles.hpp"
 #include <cstdlib>
 
-poles::poles(SDL_Renderer* __renderpole):renderimage(__renderpole){
+poles::poles(SDL_Renderer* __renderpole,int x):renderimage(__renderpole),m_x(x){
     polestexture = IMG_LoadTexture(renderimage,"gfx/background/POLE.png");
     // srand(std::time(0));
+    m_x=x;
+    m_y = (rand() % 300)+300;
 
-    m_position.x = 500;
-    m_position.y = 500;   
+    m_position.x = (int)m_x;
+    m_position.y = m_y;
     m_position.w = 100;
     m_position.h = 500;
-    
-    m_x = 1000.0;
-    m_y = 500.0;
-
-
-    // m_position_2.x = m_position.x;
-    // m_position_2.y = m_position.y+m_position.w+100;   
-    // m_position_2.w = m_position.w;
-    // m_position_2.h = m_position.h;
 
     m_position_2.x = m_position.x;
     m_position_2.y = m_position.y - 700;   
@@ -48,19 +41,19 @@ void poles::update(double delta_time){
     m_position.y = (int)m_y;
     m_position_2.y = (int)m_y-700;
     if (m_x <= -100){
-        m_y=(rand() % 700)+300;
+        m_y=(rand() % 500)+200;
         m_x=1250;
     }
 
 }
 
 int poles::getx(){
-return m_x;
+return (int)m_x;
 
 }
 
 int poles::gety(){
-    return m_y;
+    return (int)m_y;
 
 }
 

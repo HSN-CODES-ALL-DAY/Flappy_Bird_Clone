@@ -5,8 +5,8 @@
 
 int main(){
 
-    window h;
-    h.loop();
+    window game;
+    game.loop();
 
     return 0;
 }

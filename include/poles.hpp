@@ -5,7 +5,7 @@
 
 class poles{
     public:
-    poles(SDL_Renderer* __renderpoles);
+    poles(SDL_Renderer* __renderpoles,int x);
     ~poles() = default;
     void draw();
     void update(double delta_time);

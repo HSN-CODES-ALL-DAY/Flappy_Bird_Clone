@@ -23,4 +23,8 @@ class window{
     SDL_Window *WINDOW;
     bird flappy;
     poles pole;
+    poles pole2;
+    poles pole3;
+    poles pole4;
+    // poles pole5;
 };

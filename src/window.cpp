@@ -9,7 +9,6 @@ pole(nullptr,100),
 pole2(nullptr,100),
 pole3(nullptr,100),
 pole4(nullptr,100)
-
 {
     bool keep_window_open = true;
     if (SDL_Init(SDL_INIT_VIDEO) > 0) {
